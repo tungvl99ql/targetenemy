@@ -60,11 +60,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
     <Compile Include="Assets\scrips\bullet.cs" />
     <Compile Include="Assets\scrips\CatMove.cs" />
     <Compile Include="Assets\scrips\Enemy.cs" />
     <Compile Include="Assets\scrips\FindClosest.cs" />
     <Compile Include="Assets\scrips\gun.cs" />
+    <Compile Include="Assets\scrips\singleton.cs" />
+    <None Include="Assets\LeanTween\ReadMe.txt" />
+    <None Include="Assets\LeanTween\License.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/project unity/target enemy/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -11,11 +11,21 @@ public class gun : MonoBehaviour
     public Vector3 posEnemy;
     public Vector2 direction;
     public float speed;
-   
+    public SpriteRenderer spr;
+    
+    private void Awake()
+    {
+        MakeInstance();
+    }
+    private void Start()
+    {
+        spr = GetComponent<SpriteRenderer>();
+    }
     void Update()
     {
         FindClosestEnemy();
         shoot();
+        FlipGunToDirectionEnemy();
     }
     void mouseposition()
     {
@@ -28,7 +38,7 @@ public class gun : MonoBehaviour
    public void FindClosestEnemy()
     {
 
-        float distanceToClosestEnemy = 60;
+        float distanceToClosestEnemy = 60f;
         Enemy closestEnemy = null;
         Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
 
@@ -39,27 +49,60 @@ public class gun : MonoBehaviour
             {
                 distanceToClosestEnemy = distanceToEnemy;
                 closestEnemy = currentEnemy;
-
                 //sp.transform.position = closestEnemy.transform.position;
                 //posEnemy = closestEnemy.transform.position;
             }
         }
 
-        //Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
-        //Debug.Log(closestEnemy.gameObject.transform.position);
-        sp.transform.position = closestEnemy.transform.position;
-        posEnemy = closestEnemy.transform.position;
+        if(closestEnemy != null)
+        {
+            Debug.DrawLine(this.transform.position, closestEnemy.transform.position);
+            sp.transform.position = closestEnemy.transform.position;
+            posEnemy = closestEnemy.transform.position;
+            Vector2 direction = new Vector2(posEnemy.x - transform.position.x, posEnemy.y - transform.position.y);
+            transform.right = direction;
+        }if(closestEnemy == null)
+        {
+            direction = new Vector2(0,0);
+            transform.right = direction;
+            posEnemy = bulletPoint.transform.position;
 
-        Vector2 direction = new Vector2(posEnemy.x - transform.position.x, posEnemy.y - transform.position.y);
-        transform.right = direction;
-        
+        }
     }
     void shoot()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(posEnemy != bulletPoint.transform.position)
         {
-            Instantiate(bullet, bulletPoint.transform.position, Quaternion.identity);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Instantiate(bullet, bulletPoint.transform.position, Quaternion.identity);
+            }
         }
+    }
+    
+    public void FlipGunToDirectionEnemy()
+    {
+        Vector3 v3 = posEnemy;
+        Vector3 v4 = this.transform.position - v3;
+        if (v4.y > 0)
+        {
+            Debug.Log("enemy ben duoi");
+            
+        }
+        if(v4.y <0)
+        {
+            Debug.Log("enemy ben tren");
+            //spr.flipX = true;
+        }
+        if(v4.x > 0)
+        {
+            spr.flipY = true;
+        }
+        if (v4.x < 0)
+        {
+            spr.flipY = false;
+        }
+
     }
     void MakeInstance()
     {
